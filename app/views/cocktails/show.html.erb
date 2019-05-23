@@ -1,0 +1,28 @@
+<div class='container'>
+  <h1><%= @cocktail.name %></h1>
+
+  Wow, that's an amazing cocktail!
+
+  See my doses:
+
+  <% @cocktail.doses.each do |dose| %>
+    <p>
+      <%= dose.description %>
+      <%= dose.ingredient.name %>
+      <%= link_to 'delete', cocktail_dose_path(@cocktail, dose), method: :delete %>
+    </p>
+  <% end %>
+
+<hr>
+    <%= simple_form_for [@cocktail, @dose] do |f|  %>
+      <%= f.input :description %>
+      <%= f.association :ingredient %>
+      <%= f.submit 'Submit', class: 'btn btn-primary' %>
+    <% end %>
+
+
+
+  <%= link_to 'edit', edit_cocktail_path(@cocktail)  %>
+  <%= link_to 'delete', cocktail_path(@cocktail), method: :delete  %>
+  <%= link_to 'back', cocktails_path  %>
+</div>
